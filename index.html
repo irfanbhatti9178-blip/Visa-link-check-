@@ -1,0 +1,422 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visa Link Check – Official Visa Website Checker</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#22407A">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%2322407A'/%3E%3Cpath d='M9 16.5l5 5 9-10' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EDF1F5;--surface:#fff;--ink:#15202B;--muted:#53616D;--line:#CBD5DE;--blue:#22407A;--blue-dark:#183063;--ok:#14683F;--ok-bg:#E6F4EC;--bad:#B0201A;--bad-bg:#FCEAE8;--warn:#8F5200;--warn-bg:#FDF0DC;--neutral:#3F4C58;--neutral-bg:#E8EDF1;--head:"Bricolage Grotesque",system-ui,sans-serif;--body:"Instrument Sans",system-ui,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+[data-theme="dark"]{--bg:#0F1419;--surface:#1A2332;--ink:#E7ECF3;--muted:#8B9AAB;--line:#2A3647;--blue:#4A7BD4;--blue-dark:#3A6BC4;--ok:#3DD68C;--ok-bg:#0F2E1F;--bad:#F87171;--bad-bg:#3B1212;--warn:#FBBF24;--warn-bg:#3B2A0A;--neutral:#A0AEC0;--neutral-bg:#1E293B}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.5 var(--body);transition:background .2s,color .2s}
+.wrap{width:min(100% - 1.5rem,720px);margin-inline:auto;padding:1rem 0 2rem}
+.top{background:var(--blue);color:#fff;padding:.7rem 0}.bar{display:flex;align-items:center;gap:.6rem}.brand{font:800 1.1rem/1 var(--head)}.upd{margin-left:auto;font-size:.8rem;opacity:.9}
+.theme-btn{background:rgba(255,255,255,.15);border:0;color:#fff;width:36px;height:36px;border-radius:8px;cursor:pointer;font-size:1.1rem;display:flex;align-items:center;justify-content:center}
+h1{font:800 1.7rem/1.15 var(--head);margin:1.2rem 0 .5rem}.lead{color:var(--muted);margin:0 0 1.2rem;font-size:1.05rem}
+form.check{display:grid;gap:.6rem;margin-bottom:.8rem}label{font-weight:600;font-size:.95rem}
+.field{display:flex;background:var(--surface);border:2px solid var(--blue);border-radius:10px;overflow:hidden}
+.field input{flex:1;border:0;background:transparent;padding:.85rem .8rem;font:500 1rem var(--body);color:var(--ink)}.field input:focus{outline:none}
+.field .paste{border:0;border-left:2px solid var(--line);background:var(--neutral-bg);color:var(--blue);font:600 .9rem var(--body);padding:0 .9rem;cursor:pointer}
+.go{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:.65rem 1.3rem;border-radius:10px;border:2px solid var(--blue);background:var(--blue);color:#fff;font:700 1rem var(--body);cursor:pointer}.go:hover{background:var(--blue-dark)}
+.try{display:flex;flex-wrap:wrap;gap:.4rem;margin:.3rem 0 1.2rem;color:var(--muted);font-size:.9rem}
+.chip{border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.4rem .75rem;font:500 .85rem var(--mono);cursor:pointer}
+#result{scroll-margin-top:1rem}
+.res{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--tone);border-radius:10px;padding:1rem;margin-top:.5rem}
+.tone-ok{--tone:var(--ok);--tone-bg:var(--ok-bg)}.tone-bad{--tone:var(--bad);--tone-bg:var(--bad-bg)}.tone-warn{--tone:var(--warn);--tone-bg:var(--warn-bg)}.tone-neutral{--tone:var(--neutral);--tone-bg:var(--neutral-bg)}
+.res-top{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:.7rem}
+.stamp{display:inline-block;color:var(--tone);font:800 .95rem/1 var(--head);text-transform:uppercase;letter-spacing:.08em;padding:.5rem .7rem;border:2.5px solid currentColor;border-radius:5px}
+.host{font:500 .9rem/1.3 var(--mono);word-break:break-all;flex:1}.host .dim{color:var(--muted)}.host strong{font-weight:700;background:var(--tone-bg);padding:0 .15rem;border-radius:3px}.host small{display:block;font:500 .75rem var(--body);color:var(--muted);margin-top:.1rem}
+.res h3{font:800 1.2rem/1.2 var(--head);margin:0 0 .5rem}.res ul{margin:.2rem 0 .8rem;padding-left:1.1rem}.res li{margin:.25rem 0}.res li.crit{font-weight:600;color:var(--bad)}
+.facts{background:var(--tone-bg);border-radius:8px;padding:.7rem .8rem;margin:.3rem 0 .8rem}.facts .v{display:flex;justify-content:space-between;gap:1rem;border-top:1px solid #0001;padding:.25rem 0}.facts .v:first-of-type{border-top:0}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.3rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:.5rem 1.1rem;border-radius:8px;border:2px solid var(--blue);background:var(--blue);color:#fff;font:700 .95rem var(--body);cursor:pointer;text-decoration:none}.btn.ghost{background:transparent;color:var(--blue)}
+.note{font-size:.88rem;color:var(--muted)}
+.block{margin-top:2rem}
+.fee-form{display:grid;gap:.7rem;margin:.7rem 0 1rem}
+select,.amt input{width:100%;min-height:46px;border:2px solid var(--line);border-radius:9px;background:var(--surface);font:500 1rem var(--body);color:var(--ink);padding:.55rem .7rem}
+.amt{display:grid;grid-template-columns:1fr 5.5rem;gap:.4rem}
+.search{margin:.5rem 0 .8rem}.search input{width:100%;min-height:44px;border:2px solid var(--line);border-radius:9px;padding:.5rem .7rem;font:500 .95rem var(--body);background:var(--surface);color:var(--ink)}
+.dl{margin:0;padding:0;list-style:none;border-top:1px solid var(--line)}.dl li{padding:.6rem 0;border-bottom:1px solid var(--line)}.dl .d{font:600 .92rem var(--mono);word-break:break-all}.dl .m{font-size:.85rem;color:var(--muted)}
+.tag{display:inline-block;font-size:.75rem;font-weight:700;border-radius:4px;padding:.05rem .35rem;margin-left:.3rem}.tag.bad{background:var(--bad-bg);color:var(--bad)}.tag.warn{background:var(--warn-bg);color:var(--warn)}
+footer{margin-top:2rem;padding-top:1rem;border-top:1px solid var(--line);font-size:.82rem;color:var(--muted)}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap bar">
+    <svg width="26" height="26" viewBox="0 0 32 32"><circle cx="16" cy="16" r="14" fill="none" stroke="#fff" stroke-width="2.5"/><path d="M9.5 16.5l4.5 4.5 8.5-9.5" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span class="brand">Visa Link Check</span>
+    <span class="upd" id="upd"></span>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">☾</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Is this visa website official?</h1>
+  <p class="lead">Paste any visa, ETA or ESTA website address. See if it is the real government portal and what the official fee is.</p>
+
+  <form class="check" id="f" novalidate>
+    <label for="u">Website address</label>
+    <div class="field">
+      <input id="u" type="text" inputmode="url" autocapitalize="off" autocomplete="off" spellcheck="false" placeholder="e.g. esta.cbp.dhs.gov">
+      <button type="button" class="paste" id="paste" hidden>Paste</button>
+    </div>
+    <button class="go" type="submit">Check this site</button>
+  </form>
+
+  <div class="try">
+    <span>Try:</span>
+    <button type="button" class="chip" data-v="esta.cbp.dhs.gov">esta.cbp.dhs.gov</button>
+    <button type="button" class="chip" data-v="eta.gov.lk">eta.gov.lk</button>
+    <button type="button" class="chip" data-v="evisa.gov.vn">evisa.gov.vn</button>
+    <button type="button" class="chip" data-v="visa.nadragov.online">visa.nadragov.online</button>
+  </div>
+
+  <div id="result" tabindex="-1" aria-live="polite"></div>
+
+  <section class="block">
+    <h2 style="font:800 1.3rem/1.2 var(--head);margin:0 0 .4rem">A site quoted you a price?</h2>
+    <p class="note">Compare the price with the official government fee.</p>
+    <div class="fee-form">
+      <div><label for="fd">Document</label><select id="fd"></select></div>
+      <div id="fvWrap" hidden><label for="fv">Type</label><select id="fv"></select></div>
+      <div>
+        <label for="fa">Price shown to you</label>
+        <div class="amt"><input id="fa" inputmode="decimal" placeholder="e.g. 69"><select id="fc"></select></div>
+      </div>
+    </div>
+    <div id="feeOut" aria-live="polite"></div>
+  </section>
+
+  <section class="block">
+    <h2 style="font:800 1.3rem/1.2 var(--head);margin:0 0 .4rem">Sites on our lists</h2>
+    <p class="note">Government-flagged sites and known private companies.</p>
+    <div class="search"><input id="q" type="search" placeholder="Search e.g. nadra, india..."></div>
+    <ul class="dl" id="dl"></ul>
+    <p class="note" id="dlnote"></p>
+  </section>
+</main>
+
+<footer class="wrap">
+  <p>Not affiliated with any government. Always confirm fees on the official portal. Data checked <span id="upd2"></span>.</p>
+</footer>
+
+<script>
+const CONFIG = { siteName: "Visa Link Check" };
+
+const DOCS = [
+  { id:"us-esta", region:"United States", name:"ESTA", status:"live",
+    hosts:["esta.cbp.dhs.gov"], portal:"https://esta.cbp.dhs.gov/",
+    variants:[{label:"ESTA application", amount:40.27, currency:"USD", changes:[{from:"2026-10-16", amount:40.62}]}],
+    valid:"Up to 2 years, or until your passport expires",
+    notes:["For citizens of Visa Waiver Program countries.",
+           "The old $21 fee is out of date. It rose to $40 in Sept 2025.",
+           "Scheduled to rise to $40.62 on 16 Oct 2026."],
+    sources:[{label:"DHS / Federal Register", url:"https://www.federalregister.gov/"}] },
+
+  { id:"uk-eta", region:"United Kingdom", name:"ETA", status:"live",
+    hosts:["gov.uk"], pathHint:"/eta", portal:"https://www.gov.uk/eta",
+    variants:[{label:"UK ETA", amount:20, currency:"GBP"}],
+    valid:"2 years or until your passport expires",
+    notes:["Apply only in the UK ETA app or on GOV.UK.",
+           "It was £16 until April 2026."],
+    sources:[{label:"Home Office", url:"https://www.gov.uk/eta"}] },
+
+  { id:"eu-etias", region:"Europe (Schengen)", name:"ETIAS", status:"notlive",
+    hosts:["travel-europe.europa.eu"], portal:"https://travel-europe.europa.eu/etias",
+    variants:[{label:"ETIAS (when it opens)", amount:20, currency:"EUR"}],
+    valid:"3 years once it is live",
+    notes:["Not open yet. Any site selling ETIAS today is not official."],
+    sources:[{label:"Official ETIAS", url:"https://travel-europe.europa.eu/etias"}] },
+
+  { id:"ca-eta", region:"Canada", name:"eTA", status:"live",
+    hosts:["canada.ca"], portal:"https://www.canada.ca/en/immigration-refugees-citizenship/services/visit-canada/eta/apply.html",
+    variants:[{label:"Canada eTA", amount:7, currency:"CAD"}],
+    valid:"Up to 5 years",
+    notes:["Only for visa-exempt visitors arriving by air."],
+    sources:[{label:"Government of Canada", url:"https://www.canada.ca/"}] },
+
+  { id:"au-eta", region:"Australia", name:"ETA (subclass 601)", status:"app",
+    hosts:["immi.homeaffairs.gov.au"], appOnly:true, portal:"https://immi.homeaffairs.gov.au/",
+    variants:[{label:"ETA service charge", amount:20, currency:"AUD"}],
+    valid:"12 months",
+    notes:["Apply only in the official Australian ETA app."],
+    sources:[{label:"Home Affairs", url:"https://immi.homeaffairs.gov.au/"}] },
+
+  { id:"au-evisitor", region:"Australia", name:"eVisitor (subclass 651)", status:"live",
+    hosts:[], portal:"https://immi.homeaffairs.gov.au/",
+    variants:[{label:"eVisitor", amount:0, currency:"AUD"}],
+    valid:"12 months",
+    notes:["Free for eligible European passports."],
+    sources:[{label:"Home Affairs", url:"https://immi.homeaffairs.gov.au/"}] },
+
+  { id:"in-evisa", region:"India", name:"e-Visa (tourist)", status:"live",
+    hosts:["indianvisaonline.gov.in"], portal:"https://indianvisaonline.gov.in/evisa/tvoa.html",
+    variants:[
+      {label:"30-day tourist (Apr-Jun)", amount:10, currency:"USD"},
+      {label:"30-day tourist (Jul-Mar)", amount:25, currency:"USD"},
+      {label:"1-year tourist", amount:40, currency:"USD"},
+      {label:"5-year tourist", amount:80, currency:"USD"}],
+    valid:"30 days / 1 year / 5 years",
+    notes:["Fees can differ by passport."],
+    sources:[{label:"Indian e-Visa", url:"https://indianvisaonline.gov.in/"}] },
+
+  { id:"pk-evisa", region:"Pakistan", name:"Online visa", status:"live",
+    hosts:["visa.nadra.gov.pk"], varies:true, portal:"https://visa.nadra.gov.pk/",
+    variants:[], valid:"Depends on visa type",
+    notes:["Fee depends on passport. Real sites end in .gov.pk."],
+    sources:[{label:"NADRA", url:"https://visa.nadra.gov.pk/"}] },
+
+  { id:"tr-evisa", region:"Türkiye", name:"e-Visa", status:"live",
+    hosts:["evisa.gov.tr"], varies:true, portal:"https://www.evisa.gov.tr/en/",
+    variants:[], valid:"Depends on passport",
+    notes:["Only official address is evisa.gov.tr."],
+    sources:[{label:"evisa.gov.tr", url:"https://www.evisa.gov.tr/en/"}] },
+
+  { id:"lk-eta", region:"Sri Lanka", name:"ETA", status:"live",
+    hosts:["eta.gov.lk"], portal:"https://eta.gov.lk/",
+    variants:[
+      {label:"Tourist ETA (free countries)", amount:0, currency:"USD"},
+      {label:"Tourist ETA (SAARC)", amount:20, currency:"USD"},
+      {label:"Tourist ETA (other)", amount:50, currency:"USD"},
+      {label:"Business ETA (SAARC)", amount:30, currency:"USD"},
+      {label:"Business ETA (other)", amount:55, currency:"USD"}],
+    valid:"30 days",
+    notes:["From May 2026, 40 countries get free tourist ETA."],
+    sources:[{label:"eta.gov.lk", url:"https://eta.gov.lk/"}] },
+
+  { id:"vn-evisa", region:"Vietnam", name:"e-Visa", status:"live",
+    hosts:["evisa.gov.vn","evisa.xuatnhapcanh.gov.vn"], portal:"https://evisa.gov.vn/",
+    variants:[
+      {label:"Single-entry", amount:25, currency:"USD"},
+      {label:"Multiple-entry", amount:50, currency:"USD"}],
+    valid:"Up to 90 days",
+    notes:["Open to all nationalities."],
+    sources:[{label:"evisa.gov.vn", url:"https://evisa.gov.vn/"}] },
+
+  { id:"sa-evisa", region:"Saudi Arabia", name:"Tourist eVisa", status:"live",
+    hosts:["visa.visitsaudi.com","visitsaudi.com"], portal:"https://visa.visitsaudi.com/",
+    variants:[{label:"Tourist eVisa (typical)", amount:535, currency:"SAR"}],
+    valid:"1 year multiple entry",
+    notes:["Includes insurance. Apply only on visa.visitsaudi.com."],
+    sources:[{label:"Visit Saudi", url:"https://visa.visitsaudi.com/"}] }
+];
+
+const FLAGGED = [
+  ...["evisaindia.org","visatoindia.org","india-visa-gov.in","indianevisaservice.org","evisa-india-online.com","e-touristvisaindia.com","e-visaindia.com","indiavisa.org.in","evisaindia.com","online-visaindia.com","globalvisacorp.com"].map(d=>({
+    domain:d, doc:"in-evisa", by:"Indian advisories", url:"https://www.cgisf.gov.in/"})),
+  {domain:"nadragov.online", doc:"pk-evisa", by:"NADRA", url:"https://tribune.com.pk/"},
+  {domain:"pakistanvisaonline.org", doc:"pk-evisa", by:"Pakistan High Commission", url:"https://pakhcnewdelhi.org.pk/"},
+  {domain:"applyevisa.com", doc:"pk-evisa", by:"NADRA", url:"https://dailytimes.com.pk/"}
+];
+
+const THIRD_PARTY = [
+  {domain:"estaeta.com", doc:null, note:"Private service with its own fee.", url:null},
+  {domain:"ivisa.com", doc:null, note:"Commercial visa-service company.", url:null},
+  {domain:"govr.ae", doc:null, note:"Private UAE visa platform.", url:null}
+];
+
+const GOV_SUFFIXES = ["gov","gov.uk","gc.ca","canada.ca","gov.in","nic.in","gov.pk","gov.tr","gov.au","europa.eu","gov.lk","gov.vn","gov.sa","visitsaudi.com"];
+const MULTI_SUFFIX = ["co.uk","org.uk","ac.uk","gov.uk","gov.in","co.in","org.in","net.in","gov.pk","com.pk","org.pk","gov.tr","com.tr","org.tr","gov.au","com.au","org.au","gc.ca","gov.lk","com.lk","gov.vn","gov.sa"];
+const RISKY_TLDS = ["online","site","xyz","top","info","click","shop","store","live","vip","club","cc","icu","tk","work","website","space","fun"];
+const COUNTRY_TOK = "us|usa|uk|gb|canada|canadian|india|indian|pakistan|pakistani|turkey|turkish|turkiye|australia|australian|aus|europe|european|eu|schengen|american|british|sri|lanka|vietnam|vietnamese|saudi|arabia|uae|emirates";
+const FILLER_TOK = "e|visa|visas|evisa|esta|eta|etias|online|official|gov|government|apply|application|applications|portal|form|forms|travel|entry|service|services|center|centre|app|pass|permit|express|fast|now|help|hub|direct|document|documents|authorization|authorisation|electronic|immigration|embassy|consulate|authority|ministry|national|global|world|easy|quick|simple|my|the|for|to|in|of|and|free|check|status|desk|agency|agent|pro|plus|expert|secure|trusted";
+const ALLOWED_SEG = new RegExp("^(?:" + COUNTRY_TOK + "|" + FILLER_TOK + ")+$");
+
+function hostMatches(host, domain){ return host === domain || host.endsWith("." + domain); }
+function registrable(host){
+  const labels = host.split(".");
+  for(const s of MULTI_SUFFIX){ if(host.endsWith("." + s)) return labels.slice(-(s.split(".").length + 1)).join("."); }
+  return labels.slice(-2).join(".");
+}
+function parseInput(raw){
+  let s = String(raw || "").trim();
+  if(!s) return {error:"empty"};
+  s = s.replace(/^[<(\["'\s]+|[>)\]"',.;\s]+$/g, "");
+  if(/\s/.test(s)){ const tok = s.split(/\s+/).find(t => /\./.test(t)); if(!tok) return {error:"invalid"}; s = tok.replace(/^[<(\["']+|[>)\]"',.;]+$/g, ""); }
+  if(/^[a-z][a-z0-9+.-]*:\/\//i.test(s) === false) s = "https://" + s;
+  let url;
+  try{ url = new URL(s); }catch(e){ return {error:"invalid"}; }
+  if(url.protocol !== "http:" && url.protocol !== "https:") return {error:"invalid"};
+  const host = url.hostname.toLowerCase().replace(/\.$/, "");
+  const isIp = /^\d{1,3}(\.\d{1,3}){3}$/.test(host) || host.startsWith("[");
+  if(!isIp && (!host.includes(".") || host.length < 4)) return {error:"invalid"};
+  return { host, hostNoWww: host.replace(/^www\./, ""), path: url.pathname, insecure: url.protocol === "http:", userinfo: !!(url.username || url.password), punycode: host.split(".").some(l => l.startsWith("xn--")), isIp };
+}
+function guessDoc(text){
+  const t = text.replace(/[^a-z]/g, "");
+  if(/pakistan|nadra/.test(t)) return "pk-evisa";
+  if(/turk/.test(t)) return "tr-evisa";
+  if(/india/.test(t)) return "in-evisa";
+  if(/canad/.test(t)) return "ca-eta";
+  if(/austral|^aus/.test(t)) return "au-eta";
+  if(/etias|schengen|europe|^eu/.test(t)) return "eu-etias";
+  if(/esta(?!te)|usa|american|^us/.test(t)) return "us-esta";
+  if(/uk|gb|british/.test(t)) return "uk-eta";
+  if(/sri|lanka/.test(t)) return "lk-eta";
+  if(/vietnam|viet/.test(t)) return "vn-evisa";
+  if(/saudi|arabia/.test(t)) return "sa-evisa";
+  return null;
+}
+function visaSignal(host){
+  const reg = registrable(host);
+  const suffix = reg.split(".").slice(1).join(".");
+  const nameLabels = host.slice(0, host.length - suffix.length - 1).split(".").filter(Boolean);
+  const strong = seg => ALLOWED_SEG.test(seg) && (/visa|esta|etias/.test(seg) || (/eta/.test(seg) && seg.length > 3));
+  let hit = false;
+  for(const l of nameLabels){ const segs = l.split("-").filter(Boolean); if(segs.some(strong) || strong(segs.join(""))) hit = true; }
+  const joined = nameLabels.join(" ");
+  return {hit, joined, suffix, govClaim: /gov|official|government|embassy|immigration/.test(joined)};
+}
+function classify(p, docs){
+  const h = p.hostNoWww;
+  const findDoc = id => docs.find(d => d.id === id) || null;
+  for(const d of docs){ if(d.hosts.includes(h)) return {kind:"official", doc:d, tech:techFlags(p)}; }
+  const fl = FLAGGED.find(f => hostMatches(h, f.domain));
+  if(fl) return {kind:"flagged", doc:findDoc(fl.doc) || findDoc(guessDoc(h)), flag:fl, tech:techFlags(p)};
+  const tp = THIRD_PARTY.find(f => hostMatches(h, f.domain));
+  if(tp) return {kind:"third", doc:findDoc(tp.doc) || findDoc(guessDoc(h)), tp, tech:techFlags(p)};
+  if(GOV_SUFFIXES.some(s => hostMatches(h, s))) return {kind:"govother", doc:null, tech:techFlags(p)};
+  const sig = visaSignal(h);
+  const tech = techFlags(p);
+  if(sig.hit || p.userinfo || p.isIp || p.punycode){
+    const reasons = [];
+    const doc = findDoc(guessDoc(sig.joined || h));
+    if(sig.hit) reasons.push("The name suggests a visa service, but the address isn't on a government domain.");
+    if(sig.hit && sig.govClaim) reasons.push("It uses words like “gov” or “official” in the name.");
+    if(RISKY_TLDS.includes(sig.suffix)) reasons.push("It ends in ." + sig.suffix + ", often used by short-lived sites.");
+    return {kind:"lookalike", doc, reasons, tech};
+  }
+  return {kind:"unknown", doc:null, tech};
+}
+function techFlags(p){
+  const t = [];
+  if(p.userinfo) t.push({crit:true, text:"The address contains an @ sign. This is often used to make a bad address look official."});
+  if(p.punycode) t.push({crit:true, text:"The address uses special characters that can imitate normal letters."});
+  if(p.isIp) t.push({crit:true, text:"The address is a bare number (IP). Government portals don't use these."});
+  if(p.insecure) t.push({crit:false, text:"The link starts with http, not https."});
+  return t;
+}
+function currentAmount(v, today){
+  let a = v.amount;
+  for(const c of (v.changes || []).slice().sort((x,y) => x.from < y.from ? -1 : 1)) if(c.from <= today) a = c.amount;
+  return a;
+}
+const USD_PER = {USD:1, GBP:1.33, EUR:1.16, CAD:0.72, AUD:0.66, INR:0.0115, PKR:0.0036, AED:0.272, SAR:0.267, VND:0.00004};
+function compareFee(offAmt, offCur, q, qCur){
+  const same = offCur === qCur;
+  const offUSD = offAmt * (USD_PER[offCur] || 1), qUSD = q * (USD_PER[qCur] || 1);
+  const offInQ = offUSD / (USD_PER[qCur] || 1);
+  if(offAmt === 0) return {level: q > 0 ? "over" : "ok", ratio:null, offInQ, same};
+  const ratio = same ? q / offAmt : qUSD / offUSD;
+  const tol = same ? 1.08 : 1.25;
+  let level = "ok";
+  if(ratio < 0.8) level = "low"; else if(ratio > 1.8) level = "over"; else if(ratio > tol) level = "high";
+  return {level, ratio, offInQ, same};
+}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const today = new Date().toISOString().slice(0,10);
+function money(a, cur){ try{ return new Intl.NumberFormat("en-US",{style:"currency",currency:cur,minimumFractionDigits:Number.isInteger(a)?0:2,maximumFractionDigits:2}).format(a); }catch(e){ return cur+" "+a; } }
+function niceDate(iso){ return new Date(iso+"T00:00:00").toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"}); }
+function docLabel(d){ return d.region+" "+d.name; }
+function feeLines(d){
+  if(d.varies || !d.variants.length) return [{label:"Fee", text:"Depends on your passport"}];
+  return d.variants.map(v => ({label:v.label, text: v.amount===0?"Free":money(currentAmount(v,today),v.currency)}));
+}
+function hostHtml(p){
+  const reg = registrable(p.hostNoWww);
+  const pre = p.hostNoWww.slice(0, p.hostNoWww.length - reg.length);
+  return '<span class="dim">'+esc(pre)+'</span><strong>'+esc(reg)+'</strong><small>The part that decides who owns the site</small>';
+}
+function renderResult(p, r){
+  const doc = r.doc;
+  const stamps = {official:["Official","ok"], govother:["Government","neutral"], flagged:["Fake","bad"], third:["Not government","warn"], lookalike:["Not official","warn"], unknown:["Unverified","neutral"]};
+  const [stampText, tone] = stamps[r.kind];
+  let head="", reasons=[], showFee=false;
+  if(r.kind==="official"){
+    if(doc.appOnly) head="This is the Australian government's immigration site. The ETA itself is applied for in the official app only.";
+    else if(doc.status==="notlive") head="This is the official "+docLabel(doc)+" website, but applications aren't open yet.";
+    else head="This is the official "+docLabel(doc)+" website.";
+    reasons.push({text:"The address matches the government domain: "+doc.hosts[0]+"."});
+    if(doc.pathHint && !p.path.startsWith(doc.pathHint)) reasons.push({text:"Make sure the page is the ETA service at gov.uk"+doc.pathHint+"."});
+    if(doc.status==="notlive") reasons.push({text:"Nobody can apply yet, so any other site taking payment is not official."});
+    showFee=true;
+  }
+  if(r.kind==="govother"){ head="This is a government domain, but not one of the visa portals we track."; reasons.push({text:"Its ending is reserved for government bodies."}); }
+  if(r.kind==="flagged"){ head="A government warning names this website as fake."; reasons.push({text:"Do not enter passport details or pay here."}); reasons.push({text:"Named by "+r.flag.by+"."}); showFee=!!doc; }
+  if(r.kind==="third"){ head="This is a private company, not a government site."; reasons.push({text:r.tp.note}); reasons.push({text:"Private services add their own fee. You can apply directly for less."}); showFee=!!doc; }
+  if(r.kind==="lookalike"){ head="This is not an official government site."; reasons=(r.reasons||[]).map(t=>({text:t})); if(doc) reasons.push({text:"The official "+docLabel(doc)+" address is "+doc.hosts[0]+"."}); reasons.push({text:"We can say it isn't the government."}); showFee=!!doc; }
+  if(r.kind==="unknown"){ head="We can't verify this site."; reasons.push({text:"It isn't a government domain and isn't on our lists."}); reasons.push({text:"If it is asking for visa fees or passport details, don't continue."}); }
+  r.tech.forEach(t=>reasons.push(t));
+  const reasonHtml = reasons.length ? "<ul>"+reasons.map(x=>'<li'+(x.crit?' class="crit"':'')+'>'+esc(x.text)+'</li>').join("")+"</ul>" : "";
+  let facts="";
+  if(showFee && doc){
+    facts='<div class="facts"><p><strong>Official '+esc(docLabel(doc))+'</strong></p>'+feeLines(doc).map(l=>'<div class="v"><span>'+esc(l.label)+'</span><strong>'+esc(l.text)+'</strong></div>').join("")+'<p class="note" style="margin-top:.4rem">'+esc(doc.valid)+'. Confirm on the portal.</p></div>';
+  }
+  let actions="";
+  if(doc && r.kind!=="official") actions+='<a class="btn" href="'+esc(doc.portal)+'" target="_blank" rel="noopener">Open official page</a>';
+  if(r.kind==="official") actions+='<a class="btn" href="'+esc(doc.portal)+'" target="_blank" rel="noopener">Open official page</a>';
+  actions+='<button type="button" class="btn ghost" id="share">Share this check</button>';
+  const paid=(r.kind==="flagged"||r.kind==="lookalike"||r.kind==="third")?'**Summary:**
+Already paid?<p class="note">Call your card provider and dispute the charge. Don\'t pay again.</p>':"";
+  $("#result").innerHTML='<div class="res tone-'+tone+'" id="resCard" tabindex="-1"><div class="res-top"><span class="stamp">'+esc(stampText)+'</span><div class="host">'+hostHtml(p)+'</div></div><h3>'+esc(head)+'</h3>'+reasonHtml+facts+'<div class="actions">'+actions+'</div>'+paid+'</div>';
+  $("#share").onclick=()=>shareCheck(p.hostNoWww);
+  const card=$("#resCard"); card.scrollIntoView({behavior:"smooth",block:"start"}); card.focus({preventScroll:true});
+}
+function renderInvalid(){ $("#result").innerHTML='<div class="res tone-neutral"><h3>That doesn\'t look like a web address.</h3><p class="note" style="margin:0">Paste the full link or just the site name.</p></div>'; }
+async function shareCheck(host){
+  const url=location.origin+location.pathname+"?check="+encodeURIComponent(host);
+  try{ if(navigator.share){ await navigator.share({title:CONFIG.siteName,text:"Is "+host+" official?",url}); return; } await navigator.clipboard.writeText(url); $("#share").textContent="Link copied"; }catch(e){}
+}
+function run(value){ const p=parseInput(value); if(p.error) return renderInvalid(); renderResult(p,classify(p,DOCS)); }
+function setupFee(){
+  const fd=\( ("#fd"), fv= \)("#fv"), fc=$("#fc");
+  fd.innerHTML=DOCS.map(d=>'<option value="'+d.id+'">'+esc(docLabel(d))+'</option>').join("");
+  fc.innerHTML=Object.keys(USD_PER).map(c=>'<option>'+c+'</option>').join("");
+  const fillVariants=()=>{ const d=DOCS.find(x=>x.id===fd.value); const multi=d.variants.length>1; $("#fvWrap").hidden=!multi; fv.innerHTML=d.variants.map((v,i)=>'<option value="'+i+'">'+esc(v.label)+" ("+money(currentAmount(v,today),v.currency)+")</option>").join(""); if(d.variants.length) fc.value=d.variants[0].currency; };
+  const calc=()=>{
+    const d=DOCS.find(x=>x.id===fd.value); const out=\( ("#feeOut"); const q=parseFloat(String( \)("#fa").value).replace(",","."));
+    if(d.varies||!d.variants.length){ out.innerHTML='<div class="res tone-neutral"><h3>This fee depends on your passport.</h3><p class="note" style="margin:0">Open the <a href="'+esc(d.portal)+'" target="_blank" rel="noopener">official portal</a>.</p></div>'; return; }
+    if(!(q>=0)||$("#fa").value.trim()===""){ out.innerHTML=""; return; }
+    const v=d.variants[parseInt(fv.value||"0",10)]||d.variants[0]; const off=currentAmount(v,today), qc=fc.value; const c=compareFee(off,v.currency,q,qc);
+    const offTxt=money(off,v.currency)+(c.same?"":" (about "+money(Math.round(c.offInQ*100)/100,qc)+")"); const quotedTxt=money(q,qc);
+    let tone,head,body;
+    if(c.level==="ok"){ tone="ok"; head="That matches the official fee."; body="That's what the government charges."; }
+    else if(c.level==="low"){ tone="neutral"; head="That's lower than the official fee."; body="Check you picked the right document."; }
+    else if(c.level==="high"){ tone="warn"; head="That's above the official fee."; body="You may be paying a service fee to a middleman."; }
+    else { tone="bad"; head=c.ratio?"That's about "+(c.ratio>=10?Math.round(c.ratio):c.ratio.toFixed(1))+" times the official fee.":"The official application is free."; body="The extra goes to a middleman."; }
+    out.innerHTML='<div class="res tone-'+tone+'"><h3>'+esc(head)+'</h3><div class="facts"><div class="v"><span>Official fee</span><strong>'+esc(offTxt)+'</strong></div><div class="v"><span>You were shown</span><strong>'+esc(quotedTxt)+'</strong></div></div><p class="note" style="margin:.2rem 0 .7rem">'+esc(body)+'</p><div class="actions"><a class="btn" href="'+esc(d.portal)+'" target="_blank" rel="noopener">Open official page</a></div></div>';
+  };
+  fd.onchange=()=>{ fillVariants(); calc(); }; fv.onchange=()=>{ const d=DOCS.find(x=>x.id===fd.value); const v=d.variants[parseInt(fv.value,10)]; if(v) fc.value=v.currency; calc(); };
+  fc.onchange=calc; $("#fa").oninput=calc; fillVariants();
+}
+function renderList(filter){
+  const f=(filter||"").trim().toLowerCase();
+  const rows=[...FLAGGED.map(x=>({d:x.domain,kind:"bad",tag:"Named as fake",m:"Named by "+x.by+".",url:x.url})),...THIRD_PARTY.map(x=>({d:x.domain,kind:"warn",tag:"Private company",m:x.note,url:x.url}))].filter(r=>!f||(r.d+" "+r.m).toLowerCase().includes(f));
+  $("#dl").innerHTML=rows.map(r=>'<li><span class="d">'+esc(r.d)+'</span><span class="tag '+r.kind+'">'+r.tag+'</span><div class="m">'+esc(r.m)+(r.url?' <a href="'+esc(r.url)+'" target="_blank" rel="noopener">Source</a>':'')+'</div></li>').join("")||'<li class="m">No match. Paste the address into the checker above.</li>';
+  $("#dlnote").textContent="Addresses shown as text so you can't tap them by mistake.";
+}
+function setTheme(t){ document.documentElement.setAttribute("data-theme",t); localStorage.setItem("vlc-theme",t); $("#themeBtn").textContent=t==="dark"?"☀":"☾"; }
+function initTheme(){ const saved=localStorage.getItem("vlc-theme"); const prefers=window.matchMedia("(prefers-color-scheme: dark)").matches; setTheme(saved||(prefers?"dark":"light")); $("#themeBtn").onclick=()=>setTheme(document.documentElement.getAttribute("data-theme")==="dark"?"light":"dark"); }
+
+(function init(){
+  const nice=niceDate(today);
+  $("#upd").textContent="Checked "+nice;
+  $("#upd2").textContent=nice;
+  initTheme();
+  \( ("#f").onsubmit=e=>{ e.preventDefault(); run( \)("#u").value); };
+  document.querySelectorAll(".chip").forEach(b=>b.onclick=()=>{ $("#u").value=b.dataset.v; run(b.dataset.v); });
+  if(navigator.clipboard&&navigator.clipboard.readText){ const pb=$("#paste"); pb.hidden=false; pb.onclick=async()=>{ try{ const t=await navigator.clipboard.readText(); if(t){ $("#u").value=t; run(t); } }catch(e){ $("#u").focus(); } }; }
+  setupFee(); renderList("");
+  $("#q").oninput=e=>renderList(e.target.value);
+  const q=new URLSearchParams(location.search).get("check");
+  if(q){ $("#u").value=q; run(q); }
+})();
+</script>
+</body>
+</html>
